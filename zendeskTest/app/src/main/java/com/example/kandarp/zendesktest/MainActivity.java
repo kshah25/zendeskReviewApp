@@ -9,19 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     AlertDialog.Builder builder;
     int timerValue = 10;
     int commentDisplayOrder = 0; //0 = newest to oldest, 1 = random
+    TimerTask getReviewTask;
+    Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        reScheduleTimer(timerValue);
 
     }
 
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                             Spinner spn = (Spinner)((AlertDialog) dialog).findViewById(R.id.spinnerCommentOrder);
                             commentDisplayOrder = spn.getSelectedItemPosition();
                             Toast.makeText(MainActivity.this,"Settings changed.", Toast.LENGTH_SHORT).show();
+                            reScheduleTimer(timerValue);
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -60,4 +68,26 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void reScheduleTimer(int duration) {
+        if(timer != null)
+            timer.cancel();
+        timer = new Timer("alertTimer",true);
+        getReviewTask = new MyTimerTask();
+        timer.schedule(getReviewTask,0, duration * 1000L);
+    }
+
+    private class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable(){
+
+                @Override
+                public void run() {
+                    ((TextView)findViewById(R.id.ticketReviewBodyTxt)).setText(System.nanoTime()+"");
+                }});
+
+        }
+    }
+
 }
