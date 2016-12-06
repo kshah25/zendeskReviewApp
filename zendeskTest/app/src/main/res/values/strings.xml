@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">zendeskTest</string>
     <string name="action_settings">Settings</string>
+    <string name="server_env">https://callyoapp.zendesk.com</string>
+    <string name="auth_email">kshah25@gmail.com</string>
+    <string name="api_key">WxljPo9HEf0eRV6DDLoQK01GueekiH9ce4mYaKJL</string>
 
 <string-array name="comment_order">
     <item name="default">Newest->Oldest</item>
