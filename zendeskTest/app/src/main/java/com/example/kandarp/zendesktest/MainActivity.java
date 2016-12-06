@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SatisfactionRatings> call, Throwable t) {
-               System.out.println("fdsf");
+                Toast.makeText(getApplicationContext(), "There was an error, please try again later.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Users> call, Throwable t) {
-                    System.out.println("fdsf");
+                    Toast.makeText(getApplicationContext(), "There was an error, please try again later.", Toast.LENGTH_LONG).show();
                 }
             });
 

@@ -57,7 +57,6 @@ public class SatisfactionRatings {
 
 
      public String getDate(){;
-         System.out.print("DSFSD");
          try {
              Date date = (new SimpleDateFormat("yyyy-MM-dd")).parse(updatedAt);
              return (new SimpleDateFormat("MM/dd/yyyy")).format(date);
